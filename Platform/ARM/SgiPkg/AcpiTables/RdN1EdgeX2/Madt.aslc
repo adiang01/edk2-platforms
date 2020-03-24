@@ -14,19 +14,19 @@
 #include <Library/PcdLib.h>
 #include <IndustryStandard/Acpi.h>
 
-#define CORE_CNT   (FixedPcdGet32 (PcdClusterCount) * \
-                    FixedPcdGet32 (PcdCoreCount))
-
-#define CHIP_CNT   2
+#define CLUSTER_COUNT                 2
+#define CORES_PER_CLUSTER             4
+#define CORE_COUNT                    (CLUSTER_COUNT * CORES_PER_CLUSTER)
+#define CHIP_COUNT   2
 
 // Multiple APIC Description Table
 #pragma pack (1)
 
 typedef struct {
   EFI_ACPI_6_2_MULTIPLE_APIC_DESCRIPTION_TABLE_HEADER  Header;
-  EFI_ACPI_6_2_GIC_STRUCTURE                           GicInterfaces[CORE_CNT * CHIP_CNT];
+  EFI_ACPI_6_2_GIC_STRUCTURE                           GicInterfaces[CORE_COUNT * CHIP_COUNT];
   EFI_ACPI_6_2_GIC_DISTRIBUTOR_STRUCTURE               GicDistributor;
-  EFI_ACPI_6_2_GICR_STRUCTURE                          GicRedistributor[CHIP_CNT];
+  EFI_ACPI_6_2_GICR_STRUCTURE                          GicRedistributor[CHIP_COUNT];
 } EFI_ACPI_6_2_MULTIPLE_APIC_DESCRIPTION_TABLE;
 
 #pragma pack ()

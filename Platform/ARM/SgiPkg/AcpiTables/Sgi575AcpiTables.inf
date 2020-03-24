@@ -1,7 +1,7 @@
 ## @file
 #  ACPI table data and ASL sources required to boot the platform.
 #
-#  Copyright (c) 2018, ARM Ltd. All rights reserved.
+#  Copyright (c) 2018-2020, ARM Ltd. All rights reserved.
 #
 #  SPDX-License-Identifier: BSD-2-Clause-Patent
 #
@@ -33,8 +33,6 @@
   Platform/ARM/SgiPkg/SgiPlatform.dec
 
 [FixedPcd]
-  gArmPlatformTokenSpaceGuid.PcdCoreCount
-  gArmPlatformTokenSpaceGuid.PcdClusterCount
   gArmPlatformTokenSpaceGuid.PcdSerialDbgRegisterBase
   gArmPlatformTokenSpaceGuid.PL011UartInterrupt
 

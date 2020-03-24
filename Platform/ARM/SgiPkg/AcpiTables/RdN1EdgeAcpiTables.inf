@@ -34,8 +34,6 @@
   Platform/ARM/SgiPkg/SgiPlatform.dec
 
 [FixedPcd]
-  gArmPlatformTokenSpaceGuid.PcdCoreCount
-  gArmPlatformTokenSpaceGuid.PcdClusterCount
   gArmPlatformTokenSpaceGuid.PcdSerialDbgRegisterBase
   gArmPlatformTokenSpaceGuid.PL011UartInterrupt
 

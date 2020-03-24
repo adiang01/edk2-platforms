@@ -37,9 +37,6 @@
   AArch64/Helper.S | GCC
 
 [FixedPcd]
-  gArmPlatformTokenSpaceGuid.PcdClusterCount
-  gArmPlatformTokenSpaceGuid.PcdCoreCount
-
   gArmSgiTokenSpaceGuid.PcdDramBlock2Base
   gArmSgiTokenSpaceGuid.PcdDramBlock2Size
   gArmSgiTokenSpaceGuid.PcdGicSize
