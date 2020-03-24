@@ -35,6 +35,7 @@
   gRdN1EdgeX2AcpiTablesFileGuid
   gRdE1EdgeAcpiTablesFileGuid
   gRdDanielCfgMAcpiTablesFileGuid
+  gRdDanielCfgXlrAcpiTablesFileGuid
 
 [FeaturePcd]
   gArmSgiTokenSpaceGuid.PcdVirtioBlkSupported

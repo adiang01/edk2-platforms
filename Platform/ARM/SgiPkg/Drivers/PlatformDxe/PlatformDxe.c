@@ -51,6 +51,11 @@ STATIC SGI_PLATFORM_ACPI_TABLE_GUID_LOOKUP AcpiTableGuidLookup[] = {
       RD_DANIEL_CFGM_CONF_ID,
       MULTI_CHIP_MODE_DISABLED,
       &gRdDanielCfgMAcpiTablesFileGuid),
+  ACPI_GUID_LOOKUP (
+      RD_DANIEL_PART_NUM,
+      RD_DANIEL_CFGXLR_CONF_ID,
+      MULTI_CHIP_MODE_ENABLED,
+      &gRdDanielCfgXlrAcpiTablesFileGuid),
 };
 
 VOID
