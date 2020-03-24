@@ -257,6 +257,7 @@
   Platform/ARM/SgiPkg/AcpiTables/RdN1EdgeX2AcpiTables.inf
   Platform/ARM/SgiPkg/AcpiTables/RdE1EdgeAcpiTables.inf
   Platform/ARM/SgiPkg/AcpiTables/RdDanielCfgMAcpiTables.inf
+  Platform/ARM/SgiPkg/AcpiTables/RdDanielCfgXlrAcpiTables.inf
   MdeModulePkg/Universal/HiiDatabaseDxe/HiiDatabaseDxe.inf
 
   #
