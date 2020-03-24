@@ -103,6 +103,7 @@ READ_LOCK_STATUS   = TRUE
   INF RuleOverride=ACPITABLE Platform/ARM/SgiPkg/AcpiTables/RdN1EdgeAcpiTables.inf
   INF RuleOverride=ACPITABLE Platform/ARM/SgiPkg/AcpiTables/RdN1EdgeX2AcpiTables.inf
   INF RuleOverride=ACPITABLE Platform/ARM/SgiPkg/AcpiTables/RdE1EdgeAcpiTables.inf
+  INF RuleOverride=ACPITABLE Platform/ARM/SgiPkg/AcpiTables/RdDanielCfgMAcpiTables.inf
   INF MdeModulePkg/Universal/HiiDatabaseDxe/HiiDatabaseDxe.inf
 
   # Required by PCI
