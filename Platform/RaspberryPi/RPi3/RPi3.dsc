@@ -396,6 +396,22 @@
   gEfiMdePkgTokenSpaceGuid.PcdUartDefaultBaudRate|115200
   gEfiMdePkgTokenSpaceGuid.PcdUartDefaultReceiveFifoDepth|0
 
+  #
+  # Fixed CPU settings.
+  #
+  gRaspberryPiTokenSpaceGuid.PcdCpuLowSpeedMHz|600
+  gRaspberryPiTokenSpaceGuid.PcdCpuDefSpeedMHz|1200
+  gRaspberryPiTokenSpaceGuid.PcdCpuMaxSpeedMHz|1500
+
+  #
+  # ARM General Interrupt Controller
+  #
+  gArmTokenSpaceGuid.PcdGicInterruptInterfaceBase|0x40000000
+  gRaspberryPiTokenSpaceGuid.PcdGicPmuIrq0|0x09
+  gRaspberryPiTokenSpaceGuid.PcdGicPmuIrq1|0x09
+  gRaspberryPiTokenSpaceGuid.PcdGicPmuIrq2|0x09
+  gRaspberryPiTokenSpaceGuid.PcdGicPmuIrq3|0x09
+
   ## Default Terminal Type
   ## 0-PCANSI, 1-VT100, 2-VT00+, 3-UTF8, 4-TTYTERM
   gEfiMdePkgTokenSpaceGuid.PcdDefaultTerminalType|4
@@ -412,8 +428,8 @@
   # Clock overrides.
   #
 
-  gRaspberryPiTokenSpaceGuid.PcdCpuClock|L"CpuClock"|gConfigDxeFormSetGuid|0x0|0
-  gRaspberryPiTokenSpaceGuid.PcdCustomCpuClock|L"CustomCpuClock"|gConfigDxeFormSetGuid|0x0|600
+  gRaspberryPiTokenSpaceGuid.PcdCpuClock|L"CpuClock"|gConfigDxeFormSetGuid|0x0|1
+  gRaspberryPiTokenSpaceGuid.PcdCustomCpuClock|L"CustomCpuClock"|gConfigDxeFormSetGuid|0x0|gRaspberryPiTokenSpaceGuid.PcdCpuDefSpeedMHz
 
   #
   # SD-related.
@@ -436,7 +452,7 @@
   #
   # Display-related.
   #
-  gRaspberryPiTokenSpaceGuid.PcdDisplayEnableScaledVModes|L"DisplayEnableScaledVModes"|gConfigDxeFormSetGuid|0x0|0xff
+  gRaspberryPiTokenSpaceGuid.PcdDisplayEnableScaledVModes|L"DisplayEnableScaledVModes"|gConfigDxeFormSetGuid|0x0|0x3f
   gRaspberryPiTokenSpaceGuid.PcdDisplayEnableSShot|L"DisplayEnableSShot"|gConfigDxeFormSetGuid|0x0|1
 
   #

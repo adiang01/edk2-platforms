@@ -16,25 +16,25 @@
 
 #include <IndustryStandard/Acpi.h>
 
-// The ASL compiler can't perform arithmetic on MEMORY32SETBASE ()
-// parameters so you can't pass a constant like BASE + OFFSET (the
-// compiler just silently sets it to zero). So we need a macro that
-// can perform arithmetic base address update with an offset.
+// The ASL compiler can't perform arithmetic on MEMORY32FIXED ()
+// parameters so you can't pass a constant like BASE + OFFSET.
+// We therefore define a macro that can perform arithmetic base
+// address update with an offset.
 #define MEMORY32SETBASE(BufName, MemName, VarName, Offset)       \
     CreateDwordField (^BufName, ^MemName._BAS, VarName)          \
     Add (BCM2836_SOC_REGISTERS, Offset, VarName)
 
+#define EFI_ACPI_OEM_ID                       {'R','P','I','F','D','N'}
 #if (RPI_MODEL == 3)
-#define EFI_ACPI_OEM_ID                       {'B','C','2','8','3','6'}
-#else
-#define EFI_ACPI_OEM_ID                       {'M','C','R','S','F','T'}
+#define EFI_ACPI_OEM_TABLE_ID                 SIGNATURE_64 ('R','P','I','3',' ',' ',' ',' ')
+#elif (RPI_MODEL == 4)
+#define EFI_ACPI_OEM_TABLE_ID                 SIGNATURE_64 ('R','P','I','4',' ',' ',' ',' ')
 #endif
-#define EFI_ACPI_OEM_TABLE_ID                 SIGNATURE_64 ('R','P','I','_','E','D','K','2')
-#define EFI_ACPI_OEM_REVISION                 0x00000100
+#define EFI_ACPI_OEM_REVISION                 0x00000200
 #define EFI_ACPI_CREATOR_ID                   SIGNATURE_32 ('E','D','K','2')
-#define EFI_ACPI_CREATOR_REVISION             0x00000100
+#define EFI_ACPI_CREATOR_REVISION             0x00000200
 
-#define EFI_ACPI_VENDOR_ID                    SIGNATURE_32 ('M','S','F','T')
+#define EFI_ACPI_VENDOR_ID                    SIGNATURE_32 ('R','P','I','F')
 
 // A macro to initialise the common header part of EFI ACPI tables as defined by
 // EFI_ACPI_DESCRIPTION_HEADER structure.
@@ -125,7 +125,9 @@ typedef struct
 #define BCM2836_MBOX_INTERRUPT                  0x61
 #define BCM2836_VCHIQ_INTERRUPT                 0x62
 #define BCM2386_GPIO_INTERRUPT0                 0x51
-#define BCM2386_GPIO_INTERRUPT1                 0x53
+#define BCM2386_GPIO_INTERRUPT1                 0x52
+#define BCM2386_GPIO_INTERRUPT2                 0x53
+#define BCM2386_GPIO_INTERRUPT3                 0x54
 #define BCM2836_I2C1_INTERRUPT                  0x55
 #define BCM2836_I2C2_INTERRUPT                  0x55
 #define BCM2836_SPI0_INTERRUPT                  0x56
@@ -134,24 +136,35 @@ typedef struct
 #define BCM2836_MMCHS1_INTERRUPT                0x5E
 #define BCM2836_MINI_UART_INTERRUPT             0x3D
 #define BCM2836_PL011_UART_INTERRUPT            0x59
+#define CORTEX_L1D_SIZE                         SIZE_16KB
+#define CORTEX_L1D_SETS                         64
+#define CORTEX_L1D_ASSC                         4
+#define CORTEX_L1I_SIZE                         SIZE_16KB
+#define CORTEX_L1I_SETS                         128
+#define CORTEX_L1I_ASSC                         2
+#define CORTEX_L2_SIZE                          SIZE_512KB
+#define CORTEX_L2_SETS                          512
+#define CORTEX_L2_ASSC                          16
 #elif (RPI_MODEL == 4)
 #define BCM2836_V3D_BUS_INTERRUPT               0x2A
 #define BCM2836_DMA_INTERRUPT                   0x3B
-#define BCM2836_SPI1_INTERRUPT                  0x3D
-#define BCM2836_SPI2_INTERRUPT                  0x3D
+#define BCM2836_SPI1_INTERRUPT                  0x7D
+#define BCM2836_SPI2_INTERRUPT                  0x7D
 #define BCM2836_HVS_INTERRUPT                   0x41
 #define BCM2836_HDMI0_INTERRUPT                 0x48
 #define BCM2836_HDMI1_INTERRUPT                 0x49
 #define BCM2836_PV2_INTERRUPT                   0x4A
 #define BCM2836_PV0_INTERRUPT                   0x4D
 #define BCM2836_PV1_INTERRUPT                   0x4E
-#define BCM2836_MBOX_INTERRUPT                  0x61
-#define BCM2836_VCHIQ_INTERRUPT                 0x62
-#define BCM2386_GPIO_INTERRUPT0                 0x51
-#define BCM2386_GPIO_INTERRUPT1                 0x53
-#define BCM2836_I2C1_INTERRUPT                  0x55
-#define BCM2836_I2C2_INTERRUPT                  0x55
-#define BCM2836_SPI0_INTERRUPT                  0x56
+#define BCM2836_MBOX_INTERRUPT                  0x41
+#define BCM2836_VCHIQ_INTERRUPT                 0x42
+#define BCM2386_GPIO_INTERRUPT0                 0x91
+#define BCM2386_GPIO_INTERRUPT1                 0x92
+#define BCM2386_GPIO_INTERRUPT2                 0x93
+#define BCM2386_GPIO_INTERRUPT3                 0x94
+#define BCM2836_I2C1_INTERRUPT                  0x95
+#define BCM2836_I2C2_INTERRUPT                  0x95
+#define BCM2836_SPI0_INTERRUPT                  0x96
 #define BCM2836_USB_INTERRUPT                   0x69
 #define BCM2836_SDHOST_INTERRUPT                0x98
 #define BCM2836_MMCHS1_INTERRUPT                0x9E
@@ -159,6 +172,15 @@ typedef struct
 #define BCM2836_PL011_UART_INTERRUPT            0x99
 #define GENET_INTERRUPT0                        0xBD
 #define GENET_INTERRUPT1                        0xBE
+#define CORTEX_L1D_SIZE                         SIZE_32KB
+#define CORTEX_L1D_SETS                         256
+#define CORTEX_L1D_ASSC                         2
+#define CORTEX_L1I_SIZE                         (3*SIZE_16KB)
+#define CORTEX_L1I_SETS                         256
+#define CORTEX_L1I_ASSC                         3
+#define CORTEX_L2_SIZE                          SIZE_1MB
+#define CORTEX_L2_SETS                          1024
+#define CORTEX_L2_ASSC                          16
 #endif
 
 #endif // __ACPITABLES_H__

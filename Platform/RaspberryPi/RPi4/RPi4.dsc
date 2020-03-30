@@ -26,12 +26,6 @@
   FLASH_DEFINITION               = Platform/RaspberryPi/$(PLATFORM_NAME)/$(PLATFORM_NAME).fdf
 
   #
-  # Network definition
-  #
-  DEFINE NETWORK_TLS_ENABLE       = FALSE
-  DEFINE NETWORK_HTTP_BOOT_ENABLE = FALSE
-
-  #
   # Defines for default states.  These can be changed on the command line.
   # -D FLAG=VALUE
   #
@@ -139,6 +133,7 @@
   IntrinsicLib|CryptoPkg/Library/IntrinsicLib/IntrinsicLib.inf
   BaseCryptLib|CryptoPkg/Library/BaseCryptLib/BaseCryptLib.inf
   OpensslLib|CryptoPkg/Library/OpensslLib/OpensslLib.inf
+  TlsLib|CryptoPkg/Library/TlsLib/TlsLib.inf
 
   #
   # Uncomment (and comment out the next line) For RealView Debugger. The Standard IO window
@@ -358,6 +353,8 @@
   gEfiSecurityPkgTokenSpaceGuid.PcdRemovableMediaImageVerificationPolicy|0x04
 !endif
 
+  gEfiNetworkPkgTokenSpaceGuid.PcdAllowHttpConnections|TRUE
+
 [LibraryClasses.common]
   ArmLib|ArmPkg/Library/ArmLib/ArmBaseLib.inf
   ArmMmuLib|ArmPkg/Library/ArmMmuLib/ArmMmuBaseLib.inf
@@ -434,6 +431,20 @@
   #
   gArmTokenSpaceGuid.PcdGicDistributorBase|0xFF841000
   gArmTokenSpaceGuid.PcdGicInterruptInterfaceBase|0xFF842000
+  gRaspberryPiTokenSpaceGuid.PcdGicInterruptInterfaceHBase|0xFF844000
+  gRaspberryPiTokenSpaceGuid.PcdGicInterruptInterfaceVBase|0xFF846000
+  gRaspberryPiTokenSpaceGuid.PcdGicGsivId|0x19
+  gRaspberryPiTokenSpaceGuid.PcdGicPmuIrq0|0x30
+  gRaspberryPiTokenSpaceGuid.PcdGicPmuIrq1|0x31
+  gRaspberryPiTokenSpaceGuid.PcdGicPmuIrq2|0x32
+  gRaspberryPiTokenSpaceGuid.PcdGicPmuIrq3|0x33
+
+  #
+  # Fixed CPU settings.
+  #
+  gRaspberryPiTokenSpaceGuid.PcdCpuLowSpeedMHz|800
+  gRaspberryPiTokenSpaceGuid.PcdCpuDefSpeedMHz|1500
+  gRaspberryPiTokenSpaceGuid.PcdCpuMaxSpeedMHz|2200
 
   ## Default Terminal Type
   ## 0-PCANSI, 1-VT100, 2-VT00+, 3-UTF8, 4-TTYTERM
@@ -451,8 +462,8 @@
   # Clock overrides.
   #
 
-  gRaspberryPiTokenSpaceGuid.PcdCpuClock|L"CpuClock"|gConfigDxeFormSetGuid|0x0|0
-  gRaspberryPiTokenSpaceGuid.PcdCustomCpuClock|L"CustomCpuClock"|gConfigDxeFormSetGuid|0x0|600
+  gRaspberryPiTokenSpaceGuid.PcdCpuClock|L"CpuClock"|gConfigDxeFormSetGuid|0x0|1
+  gRaspberryPiTokenSpaceGuid.PcdCustomCpuClock|L"CustomCpuClock"|gConfigDxeFormSetGuid|0x0|gRaspberryPiTokenSpaceGuid.PcdCpuDefSpeedMHz
 
   #
   # SD-related.
@@ -475,7 +486,7 @@
   #
   # Display-related.
   #
-  gRaspberryPiTokenSpaceGuid.PcdDisplayEnableScaledVModes|L"DisplayEnableScaledVModes"|gConfigDxeFormSetGuid|0x0|0xff
+  gRaspberryPiTokenSpaceGuid.PcdDisplayEnableScaledVModes|L"DisplayEnableScaledVModes"|gConfigDxeFormSetGuid|0x0|0x3f
   gRaspberryPiTokenSpaceGuid.PcdDisplayEnableSShot|L"DisplayEnableSShot"|gConfigDxeFormSetGuid|0x0|1
 
   #
